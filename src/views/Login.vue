@@ -48,13 +48,16 @@ export default {
     signIn () {
       console.log('sign in')
       // console.log(this.user.password)
-      const api = `${process.env.VUE_APP_API}admin/signin`
+      const api = `${process.env.VUE_APP_API}/admin/signin`
       console.log(api)
       this.$http.post(api, this.user)
         .then((res) => {
-          // const { token, expired } = res.data
-          // document.cookie = `hexToken=${token};expires=${new Date(expired)}`
-          console.log(res)
+          if (res.data.success) {
+            const { token, expired } = res.data
+            document.cookie = `hexToken=${token};expires=${new Date(expired)}`
+            console.log(res)
+            this.$router.push('/dashboard/products')
+          }
         })
     }
   }
