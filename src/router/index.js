@@ -28,11 +28,20 @@ const routes = [
         component: () => import('../views/Products.vue')
       }
     ]
+  },
+  {
+    path: 'orders',
+    component: () => import('../views/Orders.vue'),
+  },
+  {
+    path: 'coupons',
+    component: () => import('../views/Coupons.vue'),
   }
 ]
 
 const router = createRouter({
   history: createWebHashHistory(),
+  linkActiveClass: 'active',
   routes
 })
 

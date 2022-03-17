@@ -22,7 +22,7 @@
             <label for="customFile" class="form-label">或 上傳圖片
               <i class="fas fa-spinner fa-spin"></i>
             </label>
-            <input type="file" id="customFile" class="form-control">
+            <input type="file" id="customFile" class="form-control" ref="fileInput" @change="uploadFile">
           </div>
           <img class="img-fluid" alt="">
           <!-- 延伸技巧，多圖 -->
@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import Modal from 'bootstrap/js/dist/modal'
+import modalMixin from '@/mixins/modalMixin'
 
 export default {
   props: {
@@ -141,15 +141,20 @@ export default {
     }
   },
   methods: {
-    showModal () {
-      this.modal.show()
-    },
-    hideModal () {
-      this.modal.hide()
+    uploadFile () {
+      const uploadedFile = this.$refs.fileInput.files[0]
+      // console.dir(uploadedFile)
+      const formData = new FormData()
+      formData.append('file-to-upload', uploadedFile)
+      const url = `${process.env.VUE_APP_API}/api/${process.env.VUE_APP_PATH}/admin/upload`
+      this.$http.post(url, formData).then((response) => {
+        console.log(response.data)
+        if (response.data.success) {
+          this.tempProduct.imageUrl = response.data.imageUrl
+        }
+      })
     }
   },
-  mounted () {
-    this.modal = new Modal(this.$refs.modal)
-  }
+  mixins: [modalMixin]
 }
 </script>
