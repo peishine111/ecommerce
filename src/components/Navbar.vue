@@ -12,7 +12,8 @@
                 <router-link to="/dashboard/coupons" class="nav-link">優惠券</router-link>
                 <a href="#" @click.prevent="logout" class="nav-link">登出</a>
               </div>
-        </div>
+            </div>
+          </div>
         </nav>
 </template>
 

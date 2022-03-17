@@ -112,10 +112,10 @@ export default {
   props: {
     order: {
       type: Object,
-      default() { return {}; }
+      default () { return {} }
     }
   },
-  data() {
+  data () {
     return {
       status: {},
       modal: '',
@@ -127,7 +127,7 @@ export default {
   mixins: [modalMixin],
   inject: ['emitter'],
   watch: {
-    order() {
+    order () {
       this.tempOrder = this.order
       this.isPaid = this.tempOrder.is_paid
     }
